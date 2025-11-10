@@ -5,6 +5,7 @@ import { buscar } from "../../../services/Services";
 import CardProduto from "../cardproduto/CardProduto";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaProdutos() {
 
@@ -18,14 +19,12 @@ function ListaProdutos() {
 
   useEffect(() => {
     if (token === '') {
-        alert('Você precisa estar logado!')
-        navigate('/')
+        ToastAlerta('Você precisa estar logado!', 'info');
+        navigate('/');
+    } else {
+      buscarProdutos();
     }
-}, [token])
-
-  useEffect(() => {
-    buscarProdutos();
-  }, []); // executa só uma vez
+  }, [token]); // Executa quando o token muda
 
   async function buscarProdutos() {
     try {
@@ -37,7 +36,15 @@ function ListaProdutos() {
 
     } catch (error: any) {
       console.error("Erro ao buscar produtos:", error);
-              handleLogout()
+      
+      // Verifica se o erro é de autenticação (401)
+      if (error.response?.status === 401) {
+        ToastAlerta("Sessão expirada. Faça login novamente.", "info");
+        handleLogout();
+      } else {
+        ToastAlerta("Erro ao carregar produtos.", "erro");
+      }
+
     } finally {
       setIsLoading(false);
     }
