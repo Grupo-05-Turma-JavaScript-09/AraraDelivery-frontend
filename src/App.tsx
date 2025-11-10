@@ -27,16 +27,6 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Login />} />
 							<Route path="/home" element={<Home />} />
-							<Route path="/cadastro"	element={<Cadastro />}/>
-							<Route path="/temas" element={<ListaTemas />} />
-							<Route path="/cadastrartema" element={<FormTema />} />
-							<Route path="/editartema/:id" element={<FormTema />} />
-							<Route path="/deletartema/:id" element={<DeletarTema />} />
-							<Route path="/postagens" element={<ListaPostagens />} />
-							<Route path="/cadastrarpostagem" element={<FormPostagem />} />
-							<Route path="/editarpostagem/:id" element={<FormPostagem />} />
-							<Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
-							<Route path="/perfil" element={<Perfil />} />
 						</Routes>
 					</div>
 					<Footer />
