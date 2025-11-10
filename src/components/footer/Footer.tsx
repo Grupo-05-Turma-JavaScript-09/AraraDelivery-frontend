@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-[#1360bb] to-[#0c3a7a] text-white relative overflow-hidden">
-      {/* Elemento decorativo - Asas da arara */}
+      {/* Elemento decorativo - Asas da arara com gradiente mais suave */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-amber-400 to-rose-400"></div>
       
       {/* Padrão de fundo sutil */}
@@ -26,7 +26,7 @@ const Footer = () => {
             </h3>
           </div>
           <p className="text-lg text-white/80 max-w-xl mx-auto">
-            Conectando o Brasil real, uma entrega de cada vez!
+            Conectando o Brasil real, uma entrega de cada vez
           </p>
         </div>
 
@@ -44,15 +44,26 @@ const Footer = () => {
                 { href: "/produtos", name: "Produtos", color: "amber" },
                 { href: "/categorias", name: "Categorias", color: "rose" },
                 { href: "/perfil", name: "Meu Perfil", color: "green" },
-                { href: "/sobre", name: "Sobre Nós", color: "purple" }
+                { href: "/sobre", name: "Sobre Nós", color: "purple", highlight: true }
               ].map((item) => (
                 <li key={item.name}>
                   <a 
                     href={item.href} 
-                    className="text-white/70 hover:text-white transition-colors duration-300 flex items-center group"
+                    className={`
+                      flex items-center group transition-all duration-300
+                      ${item.highlight 
+                        ? 'text-white font-semibold bg-white/10 hover:bg-white/20 rounded-lg px-3 py-2 border border-white/30' 
+                        : 'text-white/70 hover:text-white'
+                      }
+                    `}
                   >
-                    <div className={`w-2 h-2 ${item.color === 'white' ? 'bg-white' : `bg-${item.color}-400`} rounded-full mr-3 group-hover:scale-150 transition-transform`}></div>
+                    <div className={`w-2 h-2 ${item.color === 'white' ? 'bg-white' : `bg-${item.color}-400`} rounded-full mr-3 group-hover:scale-150 transition-transform ${item.highlight ? 'bg-amber-400' : ''}`}></div>
                     {item.name}
+                    {item.highlight && (
+                      <span className="ml-2 bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-medium animate-pulse">
+                        Novo
+                      </span>
+                    )}
                   </a>
                 </li>
               ))}
@@ -86,7 +97,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <div className="text-sm text-white/60">Email</div>
-                  <div className="font-medium text-white">grupo05.turmajavascript.09@gmail.com</div>
+                  <div className="font-medium text-white">contato@araradelivery.com</div>
                 </div>
               </div>
             </div>
@@ -125,7 +136,7 @@ const Footer = () => {
                 <span className="text-[#1360bb] text-xs font-bold">A</span>
               </div>
               <p className="text-white/70 text-sm">
-                © 2025 AraraDelivery. Todos os direitos reservados.
+                © 2024 AraraDelivery. Todos os direitos reservados.
               </p>
             </div>
             <div className="flex space-x-6 text-sm text-white/70">
