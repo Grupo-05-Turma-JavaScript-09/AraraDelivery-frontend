@@ -57,7 +57,7 @@ const ProdutoPagina = () => {
 
           {/* Card Listar */}
           <Link 
-            to="/produtos/listar"
+            to="/produtos/listar/"
             className="group relative overflow-hidden"
           >
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
