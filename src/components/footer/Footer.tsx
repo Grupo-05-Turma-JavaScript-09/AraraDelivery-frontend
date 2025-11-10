@@ -136,7 +136,7 @@ const Footer = () => {
                 <span className="text-[#1360bb] text-xs font-bold">A</span>
               </div>
               <p className="text-white/70 text-sm">
-                © 2024 AraraDelivery. Todos os direitos reservados.
+                © 2025 AraraDelivery. Todos os direitos reservados.
               </p>
             </div>
             <div className="flex space-x-6 text-sm text-white/70">
