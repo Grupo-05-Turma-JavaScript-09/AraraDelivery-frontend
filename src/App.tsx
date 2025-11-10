@@ -6,9 +6,11 @@ import Navbar from './components/navbar/Navbar'
 import { AuthProvider } from './contexts/AuthContext'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import 'react-toastify/dist/ReactToastify.css'
-import ListaProdutos from './components/produto/listaproduto/ListaProduto'
 import Cadastro from './pages/cadastro/Cadastro'
+import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
+import CategoriaPagina from './pages/categoriapagina/CategoriaPagina'
+import ListaProdutos from './components/produto/listaproduto/ListaProduto'
+import Perfil from './pages/perfil/Perfil'
 
 function App() {
 	return (
@@ -26,7 +28,17 @@ function App() {
 							
 							{/* Rotas privadas */}
 							<Route path="/home" element={<Home />} />
-							<Route path="/produtos" element={<ListaProdutos />} />
+							<Route path="/perfil" element={<Perfil />} />
+							
+							{/* Rotas de Produto */}
+							<Route path="/produtos" element={<ProdutoPagina />} />
+							<Route path="/produtos/listar" element={<ListaProdutos />} />
+							<Route path="/produtos/cadastrar" element={<ListaProdutos />} />
+							
+							{/* Rotas de Categoria */}
+							<Route path="/categorias" element={<CategoriaPagina />} />
+							<Route path="/categorias/listar" element={<CategoriaPagina />} />
+							<Route path="/categorias/cadastrar" element={<CategoriaPagina />} />
 						</Routes>
 					</div>
 					<Footer />

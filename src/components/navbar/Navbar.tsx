@@ -24,14 +24,15 @@ const Navbar = () => {
               Home
             </Link>
             
-            <Link to="/produto" className="hover:text-blue-200 transition">
+            <Link to="/produtos" className="hover:text-blue-200 transition">
               Produto
             </Link>
             
-            <Link to="/categoria" className="hover:text-blue-200 transition">
+            <Link to="/categorias" className="hover:text-blue-200 transition">
               Categoria
             </Link>
             
+
             <Link to="/perfil" className="hover:text-blue-200 transition">
               Perfil
             </Link>

@@ -20,7 +20,6 @@ function CardProduto({produto}: CardProdutoProps) {
                 </Link>
 
                 <Link to={`/deletarproduto/${produto.id}`} 
-                <Link to={`/deletarProduto/${produto.id}`} 
                     className='text-slate-100 bg-red-400 hover:bg-red-700 w-full
                     flex items-center justify-center'>
                     <button>Deletar</button>
