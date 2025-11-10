@@ -5,8 +5,8 @@ import Navbar from './components/navbar/Navbar'
 import { AuthProvider } from './contexts/AuthContext'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-
 import 'react-toastify/dist/ReactToastify.css'
+import ListaProdutos from './components/produto/listaproduto/ListaProduto'
 
 function App() {
 	return (
@@ -19,6 +19,7 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Login />} />
 							<Route path="/home" element={<Home />} />
+							<Route path="/produtos" element={<ListaProdutos />} />
 						</Routes>
 					</div>
 					<Footer />
