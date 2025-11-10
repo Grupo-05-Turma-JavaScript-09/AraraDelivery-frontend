@@ -67,7 +67,7 @@ const SobreNos = () => {
             onClick={handleComecarAgora}
             className="bg-rose-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:bg-rose-700 transition duration-300 transform hover:scale-105"
           >
-            Fazer parte dessa jornada 
+            Fazer parte dessa jornada!
           </button>
         </div>
 
@@ -267,7 +267,7 @@ const SobreNos = () => {
             onClick={handleComecarAgora}
             className="bg-rose-600 text-white px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:bg-rose-700 transition duration-300 transform hover:scale-105"
           >
-            Fazer parte dessa jornada
+            Fazer parte dessa jornada!
           </button>
         </div>
       </section>
