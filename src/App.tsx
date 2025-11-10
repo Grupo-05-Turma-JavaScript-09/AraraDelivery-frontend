@@ -8,6 +8,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import 'react-toastify/dist/ReactToastify.css'
 import ListaProdutos from './components/produto/listaproduto/ListaProduto'
+import Cadastro from './pages/cadastro/Cadastro'
 
 function App() {
 	return (
@@ -18,8 +19,12 @@ function App() {
 					<Navbar />
 					<div className="min-h-[80vh]">
 						<Routes>
+							{/* Rotas públicas */}
 							<Route path="/" element={<Login />} />
 							<Route path="/login" element={<Login />} />
+							<Route path="/cadastro" element={<Cadastro />} />
+							
+							{/* Rotas privadas */}
 							<Route path="/home" element={<Home />} />
 							<Route path="/produtos" element={<ListaProdutos />} />
 						</Routes>
