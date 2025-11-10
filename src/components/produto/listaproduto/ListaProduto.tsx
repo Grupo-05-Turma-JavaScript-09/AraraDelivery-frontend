@@ -1,13 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LinkIcon } from "@phosphor-icons/react";
 import type Produto from "../../../models/Produto";
 import { buscar } from "../../../services/Services";
 import CardProduto from "../cardproduto/CardProduto";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 function ListaProdutos() {
 
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [categorias, setProdutos] = useState<Produto[]>([]);
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+
+  const {usuario, handleLogout} = useContext(AuthContext)
+  const token = usuario.token
+
+  useEffect(() => {
+    if (token === '') {
+        alert('Você precisa estar logado!')
+        navigate('/')
+    }
+}, [token])
 
   useEffect(() => {
     buscarProdutos();
@@ -17,10 +31,13 @@ function ListaProdutos() {
     try {
       setIsLoading(true);
 
-      await buscar('/produtos', setProdutos, {});
+      await buscar('/produtos', setProdutos, {
+        headers: { Authorization: token }
+      });
 
     } catch (error: any) {
       console.error("Erro ao buscar produtos:", error);
+              handleLogout()
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +53,7 @@ function ListaProdutos() {
 
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col">
-          {!isLoading && categorias.length === 0 && (
+          {!isLoading && produtos.length === 0 && (
             <span className="text-3xl text-center my-8">
               Nenhum Produto foi encontrado!
             </span>
