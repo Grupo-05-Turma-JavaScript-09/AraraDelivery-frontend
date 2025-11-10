@@ -3,14 +3,15 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from './components/footer/Footer'
 import Navbar from './components/navbar/Navbar'
+import ListaProdutos from './components/produto/listaproduto/ListaProduto'
 import { AuthProvider } from './contexts/AuthContext'
+import Cadastro from './pages/cadastro/Cadastro'
+import CategoriaPagina from './pages/categoriapagina/CategoriaPagina'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import Cadastro from './pages/cadastro/Cadastro'
-import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
-import CategoriaPagina from './pages/categoriapagina/CategoriaPagina'
-import ListaProdutos from './components/produto/listaproduto/ListaProduto'
 import Perfil from './pages/perfil/Perfil'
+import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
+import SobreNos from './pages/sobrenos/Sobrenos'
 
 function App() {
 	return (
@@ -39,6 +40,9 @@ function App() {
 							<Route path="/categorias" element={<CategoriaPagina />} />
 							<Route path="/categorias/listar" element={<CategoriaPagina />} />
 							<Route path="/categorias/cadastrar" element={<CategoriaPagina />} />
+
+            <Route path="/sobre" element={<SobreNos />} />
+
 						</Routes>
 					</div>
 					<Footer />
