@@ -60,7 +60,7 @@ function Login() {
           {/* Campo Usuário */}
           <div className="flex flex-col gap-1">
             <label htmlFor="usuario" className="text-black font-medium">
-              Usuário
+              E-mail
             </label>
             <input
               type="text"
