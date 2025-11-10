@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://araradelivery.onrender.com",
 });
 
 export const cadastrarUsuario = async (
