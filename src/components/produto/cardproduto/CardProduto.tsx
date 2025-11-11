@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom'
-import type Produto from '../../../models/Produto'
+import { Link } from "react-router-dom";
+import type Produto from "../../../models/Produto";
 
 interface CardProdutoProps {
-  produto: Produto
+  produto: Produto;
 }
 
 function CardProduto({ produto }: CardProdutoProps) {
   const formatarPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(preco)
-  }
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(preco);
+  };
 
   return (
     <div className="flex flex-col">
@@ -32,10 +32,8 @@ function CardProduto({ produto }: CardProdutoProps) {
 
       {/* Card principal */}
       <div className="group bg-white rounded-b-3xl border border-gray-200 border-t-0 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.01] overflow-hidden flex-1">
-
         {/* Conteúdo */}
         <div className="p-8 flex flex-col h-full">
-
           {/* Foto do produto */}
           <div className="w-full h-48 bg-gray-100 rounded-2xl overflow-hidden shadow-inner mb-6">
             {produto.foto ? (
@@ -58,7 +56,6 @@ function CardProduto({ produto }: CardProdutoProps) {
 
           {/* Info do produto */}
           <div className="flex flex-col flex-1">
-
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-gray-900 mb-3 line-clamp-2">
                 {produto.nome}
@@ -75,12 +72,10 @@ function CardProduto({ produto }: CardProdutoProps) {
                 {formatarPreco(produto.preco)}
               </span>
             </div>
-
           </div>
 
           {/* Botões */}
           <div className="grid grid-cols-2 gap-4">
-
             <Link
               to={`/produtos/editar/${produto.id}`}
               className="text-center py-4 bg-gray-900 hover:bg-black text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
@@ -96,11 +91,8 @@ function CardProduto({ produto }: CardProdutoProps) {
               <span>🗑️</span>
               Deletar
             </Link>
-
           </div>
-
         </div>
-
       </div>
 
       {/* Elemento abaixo do card - Estatísticas */}
@@ -113,7 +105,7 @@ function CardProduto({ produto }: CardProdutoProps) {
             </div>
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span>Em estoque</span>
+              <span>Em estoque.</span>
             </div>
           </div>
           <div className="flex items-center gap-1 hover:text-gray-700 cursor-pointer transition-colors">
@@ -123,7 +115,7 @@ function CardProduto({ produto }: CardProdutoProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CardProduto
+export default CardProduto;
