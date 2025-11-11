@@ -138,7 +138,7 @@ function FormProduto() {
       categoria: {
         id: produto.categoria.id,
       },
-      usuario: usuarioLogado, // ✅ Envia o usuário completo conforme backend exige
+      usuario: usuarioLogado,
     };
 
     try {
@@ -170,100 +170,83 @@ function FormProduto() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#fdfdfd] to-[#f5f5f5] flex items-center justify-center py-12 px-6">
-      <div className="bg-white shadow-md rounded-2xl w-full max-w-md p-8 border border-gray-200">
-        <h1 className="text-3xl font-bold text-[#014034] mb-8 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 flex items-center justify-center py-12 px-6">
+      <div className="bg-white rounded-3xl shadow-md border border-gray-200 w-full max-w-xl p-10">
+
+        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           {id ? "Editar Produto" : "Cadastrar Produto"}
         </h1>
 
         <form onSubmit={enviarFormulario} className="flex flex-col gap-6">
+
+          {/* Nome */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="nome" className="font-semibold text-gray-700">
-              Nome do Produto
-            </label>
+            <label className="font-semibold text-gray-700">Nome do Produto</label>
             <input
               type="text"
-              id="nome"
               name="nome"
-              placeholder="Ex: Café Expresso, Bolo de Chocolate..."
               value={produto.nome || ""}
               onChange={atualizarEstado}
-              maxLength={100}
+              placeholder="Ex: Café Expresso"
               required
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#02735E]"
+              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-300"
             />
           </div>
 
+          {/* Preço */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="preco" className="font-semibold text-gray-700">
-              Preço (R$)
-            </label>
+            <label className="font-semibold text-gray-700">Preço (R$)</label>
             <input
               type="number"
-              id="preco"
               name="preco"
-              placeholder="0.00"
               value={produto.preco ?? ""}
               onChange={atualizarEstado}
+              placeholder="0.00"
               step="0.01"
-              min="0"
               required
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#02735E]"
+              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-300"
             />
           </div>
 
+          {/* Descrição */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="descricao" className="font-semibold text-gray-700">
-              Descrição
-            </label>
+            <label className="font-semibold text-gray-700">Descrição</label>
             <textarea
-              id="descricao"
               name="descricao"
-              placeholder="Descreva o produto..."
               value={produto.descricao || ""}
               onChange={atualizarEstado}
-              maxLength={300}
               rows={4}
               required
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#02735E] resize-none"
+              placeholder="Descreva o produto..."
+              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-300"
             />
           </div>
 
+          {/* Foto */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="foto" className="font-semibold text-gray-700">
-              URL da Foto (opcional)
-            </label>
+            <label className="font-semibold text-gray-700">URL da Foto</label>
             <input
               type="text"
-              id="foto"
               name="foto"
-              placeholder="https://exemplo.com/imagem.jpg"
               value={produto.foto || ""}
               onChange={atualizarEstado}
-              maxLength={5000}
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#02735E]"
+              placeholder="https://exemplo.com/imagem.jpg"
+              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-300"
             />
           </div>
 
+          {/* Categoria */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="categoria" className="font-semibold text-gray-700">
-              Categoria
-            </label>
+            <label className="font-semibold text-gray-700">Categoria</label>
             <select
-              id="categoria"
-              name="categoria"
               value={String(produto.categoria?.id ?? "")}
               onChange={selecionarCategoria}
               required
               disabled={isLoadingCategorias}
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 
-              focus:outline-none focus:ring-2 focus:ring-[#02735E] 
-              disabled:opacity-50 disabled:cursor-not-allowed"
+              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-300 disabled:opacity-50"
             >
               <option value="">
-                {isLoadingCategorias
-                  ? "Carregando..."
-                  : "Selecione a categoria..."}
+                {isLoadingCategorias ? "Carregando..." : "Selecione a categoria..."}
               </option>
 
               {categorias.map((cat) => (
@@ -274,8 +257,9 @@ function FormProduto() {
             </select>
           </div>
 
+          {/* Usuário logado */}
           {usuarioLogado && (
-            <div className="bg-gray-50 border border-gray-200 p-4 rounded-lg">
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl">
               <p className="text-sm text-gray-600">
                 <strong className="text-gray-700">Usuário:</strong>{" "}
                 {usuarioLogado.nome} (@{usuarioLogado.usuario})
@@ -283,14 +267,11 @@ function FormProduto() {
             </div>
           )}
 
+          {/* Botão */}
           <button
             type="submit"
             disabled={isLoading || isLoadingCategorias}
-            className="bg-gradient-to-r from-[#36BFB1] to-[#02735E] text-white py-3 
-            rounded-xl font-semibold shadow-md hover:shadow-lg 
-            hover:from-[#2aa698] hover:to-[#025b49] transition-all 
-            disabled:opacity-50 disabled:cursor-not-allowed flex 
-            items-center justify-center gap-2"
+            className="bg-gray-900 hover:bg-black text-white py-3 rounded-2xl font-semibold transition-all hover:shadow-lg flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
