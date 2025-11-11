@@ -8,8 +8,8 @@ interface CardProdutoProps{
 function CardProduto({produto}: CardProdutoProps) {
     return (
         <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-            <header className='py-2 px-6 bg-indigo-800 text-white font-bold text-2xl'>Produto</header>
-            <p className='p-8 text-3xl bg-slate-200 h-full'>{produto.nome}</p>
+            <header className='py-2 px-6 bg-indigo-800 text-white font-bold text-2xl'>{produto.nome}</header>
+            <p className='p-8 text-3xl bg-slate-200 h-full'>{produto.descricao}</p>
 
             <div className="flex">
                 <Link to={`/editarproduto/${produto.id}`}

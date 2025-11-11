@@ -13,6 +13,9 @@ import Login from './pages/login/Login'
 import Perfil from './pages/perfil/Perfil'
 import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
 import SobreNos from './pages/sobrenos/Sobrenos'
+import FormCategoria from './components/categoria/formcategoria/FormCategoria'
+import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria'
+import FormProduto from './components/produto/formproduto/FormProduto'
 
 function App() {
 	return (
