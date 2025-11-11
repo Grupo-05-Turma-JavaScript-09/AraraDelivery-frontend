@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Produto from "../../../models/Produto";
 import type Categoria from "../../../models/Categoria";
+import type Usuario from "../../../models/Usuario";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { buscar, cadastrar } from "../../../services/Services";
@@ -12,14 +13,14 @@ function FormProduto() {
   const { usuario: usuarioLogado, handleLogout } = useContext(AuthContext);
   const token = usuarioLogado?.token || "";
 
-  const [produto, setProduto] = useState<Produto>({
+  const [produto, setProduto] = useState<Partial<Produto>>({
     nome: "",
     preco: undefined,
     descricao: "",
     foto: "",
     categoria: undefined,
     usuario: undefined,
-  } as Produto);
+  });
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -107,7 +108,17 @@ function FormProduto() {
 
     setIsLoading(true);
     try {
-      await cadastrar("/produtos", produto, () => {}, {
+      const produtoParaEnviar: Produto = {
+        id: 0,
+        nome: produto.nome as string,
+        preco: produto.preco as number,
+        descricao: produto.descricao as string,
+        foto: produto.foto ?? "",
+        categoria: produto.categoria as Categoria,
+        usuario: produto.usuario as Usuario,
+      };
+
+      await cadastrar("/produtos", produtoParaEnviar, () => {}, {
         headers: { Authorization: token },
       });
       ToastAlerta("Produto cadastrado com sucesso!", "sucesso");
