@@ -78,7 +78,7 @@ function CardProduto({ produto }: CardProdutoProps) {
           <div className="grid grid-cols-2 gap-4">
             <Link
               to={`/produtos/editar/${produto.id}`}
-              className="text-center py-4 bg-gray-900 hover:bg-black text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
+              className="text-center py-4 bg-blue-50 border border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
             >
               <span>✏️</span>
               Editar
@@ -86,7 +86,7 @@ function CardProduto({ produto }: CardProdutoProps) {
 
             <Link
               to={`/produtos/deletar/${produto.id}`}
-              className="text-center py-4 bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
+              className="text-center py-4 bg-white border border-red-300 hover:bg-red-600 text-red-500 hover:text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
             >
               <span>🗑️</span>
               Deletar
