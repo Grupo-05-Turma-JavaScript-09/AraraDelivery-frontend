@@ -6,6 +6,14 @@ interface CardProdutoProps{
 }
 
 function CardProduto({produto}: CardProdutoProps) {
+    // Função para formatar o preço como moeda brasileira
+    const formatarPreco = (preco: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(preco)
+    }
+
     return (
         <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
 
@@ -14,7 +22,7 @@ function CardProduto({produto}: CardProdutoProps) {
             </header>
 
             {/* Conteúdo lado a lado */}
-            <div className="flex bg-slate-200 p-4 gap-4">
+            <div className="flex bg-slate-200 p-4 gap-4 relative">
 
                 {/* Foto */}
                 <div className="w-40 h-40 bg-gray-100 rounded-xl overflow-hidden">
@@ -35,10 +43,15 @@ function CardProduto({produto}: CardProdutoProps) {
                 <p className='text-xl flex-1'>
                     {produto.descricao}
                 </p>
+
+                {/* Preço no canto inferior direito */}
+                <div className='absolute bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-lg text-lg font-semibold'>
+                    {formatarPreco(produto.preco)}
+                </div>
             </div>
 
             <div className="flex">
-                <Link to={`/editarproduto/${produto.id}`}
+                <Link to={`/produtos/editar/${produto.id}`}
                     className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800
                     flex items-center justify-center py-2'>
                     <button>Editar</button>
