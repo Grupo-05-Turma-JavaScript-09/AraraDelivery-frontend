@@ -18,7 +18,8 @@ const handleExploreClick = () => {
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const videoRefs = useRef([]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
   
 
   const videos = [
@@ -71,7 +72,7 @@ const handleExploreClick = () => {
     setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length);
   };
 
-  const handleVideoLoad = (index) => {
+  const handleVideoLoad = (index: number) => {
     if (index === currentVideoIndex) {
       setIsLoading(false);
     }
@@ -83,7 +84,7 @@ const handleExploreClick = () => {
       {/* CARROSSEL DE VÍDEOS */}
       <section className="relative h-[80vh] min-h-[600px] overflow-hidden">
         {/* Vídeos do Carrossel */}
-        {videos.map((video, index) => (
+        {videos.map((video, index: number) => (
           <div
             key={video.url}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -96,7 +97,7 @@ const handleExploreClick = () => {
               </div>
             )}
             <video
-              ref={el => videoRefs.current[index] = el}
+              ref={(el) => { videoRefs.current[index] = el; }}
               src={video.url}
               className="w-full h-full object-cover"
               muted

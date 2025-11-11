@@ -5,17 +5,20 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Produto from "../../../models/Produto";
 import { buscar, deletar } from "../../../services/Services";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import type Categoria from "../../../models/Categoria";
+import type Usuario from "../../../models/Usuario";
 
 function DeletarProduto() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [produto, setProduto] = useState<Produto>({
-    id: 0,
-    titulo: "",
-    texto: "",
-    data: "",
-    categoria: null,
-    usuario: null,
+  id: 0,
+  nome: '',
+  preco: 0,
+  descricao: '',
+  foto: '',
+  categoria: {} as Categoria,
+  usuario: {} as Usuario,
   });
 
   const { usuario, handleLogout } = useContext(AuthContext);
@@ -74,7 +77,7 @@ function DeletarProduto() {
 
         <p className="text-gray-700 mb-8">
           Tem certeza que deseja excluir o produto{" "}
-          <span className="font-semibold text-[#02735E]">{produto.titulo}</span>?
+          <span className="font-semibold text-[#02735E]">{produto.nome}</span>?
         </p>
 
         <div className="flex gap-4 justify-center">
