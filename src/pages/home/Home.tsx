@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { ToastAlerta } from '../../utils/ToastAlerta';
 
 const Home = () => {
 const navigate = useNavigate();
@@ -12,6 +13,7 @@ const handleExploreClick = () => {
   if (usuario.token) {
     navigate('/produtos');
   } else {
+  ToastAlerta("Você precisa estar logado para acessar essa página!", "info");
     navigate('/login');
   }
 };
