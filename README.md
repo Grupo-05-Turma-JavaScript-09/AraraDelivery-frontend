@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# Arara Delivery - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o repositório do frontend do projeto Arara Delivery.
 
-Currently, two official plugins are available:
+## Visão Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O Arara Delivery é uma plataforma de delivery online. Este projeto representa a interface do usuário, desenvolvida com React, Vite e TypeScript.
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+-   **Autenticação de Usuário**: Cadastro e login de usuários.
+-   **Navegação**:
+    -   Página inicial (Home) com produtos em destaque.
+    -   Página de produtos com listagem, cadastro, edição e exclusão de produtos.
+    -   Página de categorias com listagem, cadastro, edição e exclusão de categorias.
+    -   Página de perfil do usuário.
+    -   Página "Sobre Nós".
+-   **Notificações**: Exibição de alertas e mensagens para o usuário.
 
-## Expanding the ESLint configuration
+## Estrutura do Projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O projeto está organizado da seguinte forma:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+/
+|-- public/
+|   |-- vite.svg
+|-- src/
+|   |-- assets/
+|   |-- components/
+|   |   |-- categoria/
+|   |   |-- footer/
+|   |   |-- navbar/
+|   |   |-- produto/
+|   |-- contexts/
+|   |   |-- AuthContext.tsx
+|   |-- models/
+|   |   |-- Categoria.ts
+|   |   |-- Produto.ts
+|   |   |-- User.ts
+|   |   |-- UserLogin.ts
+|   |-- pages/
+|   |   |-- cadastro/
+|   |   |-- categoriapagina/
+|   |   |-- home/
+|   |   |-- login/
+|   |   |-- perfil/
+|   |   |-- produtopagina/
+|   |   |-- sobrenos/
+|   |-- services/
+|   |   |-- Service.ts
+|   |-- utils/
+|   |   |-- ToastAlerta.ts
+|   |-- App.tsx
+|   |-- index.css
+|   |-- main.tsx
+|-- .gitignore
+|-- index.html
+|-- package.json
+|-- README.md
+|-- tsconfig.json
+|-- vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+-   **`src/components`**: Contém componentes React reutilizáveis.
+-   **`src/contexts`**: Armazena os contextos da aplicação (ex: `AuthContext`).
+-   **`src/models`**: Define os modelos de dados (interfaces TypeScript).
+-   **`src/pages`**: Contém as páginas da aplicação.
+-   **`src/services`**: Lida com a comunicação com a API.
+-   **`src/utils`**: Contém funções utilitárias.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tecnologias Utilizadas
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   **React**
+-   **Vite**
+-   **TypeScript**
+-   **React Router DOM**
+-   **Axios**
+-   **Tailwind CSS**
+-   **React Toastify**
+-   **Phosphor Icons**
+-   **Lucide React**
+
+## Como Executar o Projeto
+
+1.  Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/araradelivery-frontend.git
+    ```
+2.  Instale as dependências:
+    ```bash
+    cd araradelivery-frontend
+    npm install
+    ```
+3.  Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+
+A aplicação estará disponível em `http://localhost:5173`.
+
+## Scripts Disponíveis
+
+-   `npm run dev`: Inicia o servidor de desenvolvimento.
+-   `npm run build`: Compila o projeto para produção.
+-   `npm run lint`: Executa o linter.
+-   `npm run preview`: Inicia um servidor de pré-visualização do build de produção.
+
