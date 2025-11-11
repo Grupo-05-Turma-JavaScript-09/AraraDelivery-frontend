@@ -31,7 +31,7 @@ const CategoriaPagina = () => {
             Gerenciar Categorias
           </h1>
           <p className="text-lg text-gray-600 max-w-md mx-auto">
-            Organize suas categorias e ajude o AraraDelivery a{" "}
+            Organize suas categorias e ajude o Arara Delivery a{" "}
             <span className="text-[#02735E] font-semibold">voar mais alto</span>.
           </p>
         </motion.div>

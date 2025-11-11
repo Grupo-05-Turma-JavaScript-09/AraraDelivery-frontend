@@ -22,7 +22,7 @@ const FooterPublic = () => {
               <div className="text-[#1360bb] font-bold text-lg">🦜</div>
             </div>
             <h3 className="text-3xl font-black bg-linear-to-r from-white to-rose-200 bg-clip-text text-transparent">
-              AraraDelivery
+              Arara Delivery
             </h3>
           </div>
           <p className="text-lg text-white/80 max-w-xl mx-auto">
@@ -133,7 +133,7 @@ const FooterPublic = () => {
                 <span className="text-[#1360bb] text-xs font-bold">A</span>
               </div>
               <p className="text-white/70 text-sm">
-                © 2025 AraraDelivery. Todos os direitos reservados.
+                © 2025 Arara Delivery. Todos os direitos reservados.
               </p>
             </div>
             <div className="flex space-x-6 text-sm text-white/70">
