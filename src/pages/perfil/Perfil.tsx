@@ -1,25 +1,9 @@
 import { useContext, useEffect, useState, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
-
+import type IFormData from "../../models/IFormData"
 import { AuthContext } from "../../contexts/AuthContext"
 import { ToastAlerta } from "../../utils/ToastAlerta"
 
-interface IFormData {
-  nome: string
-  email: string
-  telefoneComercial: string
-  tipoCulinaria: string
-  cnpj: string
-  tempoPreparo: string
-  horarioFuncionamento: string
-  taxaEntrega: string
-  faixaPreco: string
-  cep: string
-  cidade: string
-  rua: string
-  numero: string
-  pontoReferencia: string
-}
 
 function Perfil() {
   const navigate = useNavigate()
@@ -112,20 +96,44 @@ function Perfil() {
 
         {/* Cabeçalho do Perfil (Foto + Nome) - LINHA CINZA REMOVIDA AQUI */}
         <div className="flex items-center gap-6 mb-10 pb-6"> {/* Removidas as classes "border-b border-gray-100" */}
-          <img
-            className="
-              w-32 
-              h-32
-              rounded-full
-              border-4
-              border-rose-500
-              shadow-xl
-              object-cover
-              bg-white
-            "
-            src={usuario.foto}
-            alt={`Foto de perfil de ${usuario.nome}`}
-          />
+          {usuario.foto ? (
+            <img
+              className="
+                w-32 
+                h-32
+                rounded-full
+                border-4
+                border-rose-500
+                shadow-xl
+                object-cover
+                bg-white
+              "
+              src={usuario.foto}
+              alt={`Foto de perfil de ${usuario.nome}`}
+            />
+          ) : (
+            <div
+              className="
+                w-32 
+                h-32 
+                flex 
+                items-center 
+                justify-center 
+                rounded-full 
+                border-4 
+                border-rose-500 
+                shadow-xl 
+                bg-gradient-to-br 
+                from-blue-500 
+                to-rose-500
+              "
+            >
+              <span className="text-white font-bold text-2xl text-4xl">
+                {usuario.nome?.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          )}
+
 
           <div>
             <h1 className="text-3xl md:text-4xl font-extrabold text-blue-800">
