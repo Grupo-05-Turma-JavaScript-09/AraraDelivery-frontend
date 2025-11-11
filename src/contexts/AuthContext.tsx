@@ -3,11 +3,12 @@ import type UsuarioLogin from "../models/UsuarioLogin"
 import { login } from "../services/Services"
 import { ToastAlerta } from "../utils/ToastAlerta"
 
-interface AuthContextProps {
-    usuario: UsuarioLogin
-    handleLogout(): void
-    handleLogin(usuario: UsuarioLogin): Promise<void>
-    isLoading: boolean
+export interface AuthContextProps {
+  usuario: UsuarioLogin;
+  setUsuario: React.Dispatch<React.SetStateAction<UsuarioLogin>>;
+  handleLogin: (usuarioLogin: UsuarioLogin) => Promise<void>;
+  handleLogout: () => void;
+  isLoading: boolean;
 }
 
 interface AuthProviderProps {
@@ -53,9 +54,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
     }
 
-    return (
-        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
-            {children}
-        </AuthContext.Provider>
-    )
+   return (
+  <AuthContext.Provider
+    value={{
+      usuario,
+      setUsuario,      
+      handleLogin,
+      handleLogout,
+      isLoading
+    }}
+  >
+    {children}
+  </AuthContext.Provider>
+);
 }
