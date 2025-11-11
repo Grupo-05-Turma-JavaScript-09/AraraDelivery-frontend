@@ -1,18 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import ListaCategorias from './components/categoria/listacategoria/ListaCategoria'
-import Footer from './components/footer/Footer'
-import Navbar from './components/navbar/Navbar'
-import ListaProdutos from './components/produto/listaproduto/ListaProduto'
-import { AuthProvider } from './contexts/AuthContext'
-import Cadastro from './pages/cadastro/Cadastro'
-import CategoriaPagina from './pages/categoriapagina/CategoriaPagina'
-import Home from './pages/home/Home'
-import Login from './pages/login/Login'
-import Perfil from './pages/perfil/Perfil'
-import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
-import SobreNos from './pages/sobrenos/Sobrenos'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
+import EditarCategoria from './components/categoria/formcategoria/FormCategoria';
+import ListaCategorias from './components/categoria/listacategoria/ListaCategoria';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import ListaProdutos from './components/produto/listaproduto/ListaProduto';
+import { AuthProvider } from './contexts/AuthContext';
+import Cadastro from './pages/cadastro/Cadastro';
+import CategoriaPagina from './pages/categoriapagina/CategoriaPagina';
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Perfil from './pages/perfil/Perfil';
+import ProdutoPagina from './pages/produtopagina/ProdutoPagina';
+import SobreNos from './pages/sobrenos/Sobrenos';
 
 function App() {
 	return (
@@ -41,6 +43,8 @@ function App() {
 							<Route path="/categorias" element={<CategoriaPagina />} />
 							<Route path="/categorias/listar" element={<ListaCategorias />} />
 							<Route path="/categorias/cadastrar" element={<CategoriaPagina />} />
+							<Route path="/categorias/deletar/:id" element={<DeletarCategoria />} />
+              <Route path="/editarcategoria/:id" element={<EditarCategoria />} />
 
             <Route path="/sobre" element={<SobreNos />} />
 
