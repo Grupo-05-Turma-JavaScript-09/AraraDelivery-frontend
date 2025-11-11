@@ -312,7 +312,7 @@ const handleExploreClick = () => {
                   Faça parte dessa revolução
                 </h3>
                 <p className="text-gray-600 text-center mb-6">
-                  Cada escolha no AraraDelivery é um passo para um Brasil mais conectado e humano.
+                  Cada escolha no Arara Delivery é um passo para um Brasil mais conectado e humano.
                 </p>
                 <div className="flex flex-col gap-4">
                   <Link
