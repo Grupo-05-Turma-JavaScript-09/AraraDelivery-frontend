@@ -1,12 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Home = () => {
+const navigate = useNavigate();
+const { usuario } = useContext(AuthContext);
+
+const handleExploreClick = () => {
+  if (usuario.token) {
+    navigate('/produtos');
+  } else {
+    navigate('/login');
+  }
+};
+
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const videoRefs = useRef([]);
   
+
   const videos = [
+    {
+      url: 'https://i.imgur.com/RJLGoLm.mp4',
+      name: 'arara'
+    },
     {
       url: 'https://i.imgur.com/3YG79Xe.mp4',
       name: 'hamburguer'
@@ -18,10 +37,6 @@ const Home = () => {
     {
       url: 'https://i.imgur.com/Aiaisu6.mp4',
       name: 'pizza'
-    },
-    {
-      url: 'https://i.imgur.com/RJLGoLm.mp4',
-      name: 'arara'
     }
   ];
 
@@ -157,12 +172,12 @@ const Home = () => {
 
             {/* BOTÕES - DESIGN MAIS CLEAN */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/produtos"
-                className="bg-amber-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-amber-400"
-              >
-                Explorar Produtos
-              </Link>
+            <button
+              onClick={handleExploreClick}
+              className="bg-amber-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-amber-400"
+            >
+              Explorar Produtos
+            </button>
               <Link
                 to="/sobre"
                 className="bg-transparent text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border-2 border-white"
@@ -300,16 +315,16 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col gap-4">
                   <Link
-                    to="/produtos"
+                    to="/parceiros"
                     className="bg-gradient-to-r from-blue-600 to-rose-600 text-white text-center py-4 rounded-xl font-bold hover:from-blue-700 hover:to-rose-700 transition-all duration-300 transform hover:scale-105"
                   >
-                    Descobrir Produtos
+                    Cadastre seu Negócio
                   </Link>
                   <Link
-                    to="/sobre"
+                    to="/entregador"
                     className="border-2 border-gray-300 text-gray-700 text-center py-4 rounded-xl font-bold hover:border-amber-500 hover:text-amber-600 transition-all duration-300"
                   >
-                    Conhecer Nossa Jornada
+                    Seja um Entregador
                   </Link>
                 </div>
               </div>
@@ -329,12 +344,12 @@ const Home = () => {
             uma entrega de cada vez.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/produtos"
-              className="bg-amber-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            <button
+              onClick={handleExploreClick}
+              className="border-2 border-amber-500 text-amber-500 px-8 py-4 rounded-xl font-bold text-lg hover:bg-amber-500 hover:text-white transition-all duration-300 transform hover:scale-105"
             >
-              Começar Agora
-            </Link>
+              Comece Agora
+            </button>
             <Link
               to="/sobre"
               className="border-2 border-amber-500 text-amber-500 px-8 py-4 rounded-xl font-bold text-lg hover:bg-amber-500 hover:text-white transition-all duration-300 transform hover:scale-105"
