@@ -57,7 +57,7 @@ function DeletarProduto() {
         headers: { Authorization: token },
       });
       ToastAlerta("Produto deletado com sucesso!", "sucesso");
-      navigate("/produtos");
+      navigate("/produtos/listar");
     } catch (error: any) {
       if (error.response?.status === 401) {
         ToastAlerta("Sessão expirada. Faça login novamente.", "info");
@@ -89,7 +89,7 @@ function DeletarProduto() {
           </button>
 
           <Link
-            to="/produtos"
+            to="/produtos/listar"
             className="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 transition"
           >
             Cancelar
