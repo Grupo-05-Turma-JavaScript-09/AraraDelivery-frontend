@@ -1,6 +1,6 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { ToastAlerta } from "../../utils/ToastAlerta";
-
+import type { FormEvent } from "react";
 function SejaEntregador() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
