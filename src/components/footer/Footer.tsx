@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-[#1360bb] to-[#0c3a7a] text-white relative overflow-hidden">
+    <footer className="bg-linear-to-br from-[#1360bb] to-[#0c3a7a] text-white relative overflow-hidden">
       {/* Elemento decorativo - Asas da arara com gradiente mais suave */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-amber-400 to-rose-400"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-white/30 via-amber-400 to-rose-400"></div>
       
       {/* Padrão de fundo sutil */}
       <div className="absolute inset-0 opacity-10">
@@ -18,10 +18,10 @@ const Footer = () => {
         {/* Header Compacto */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-white to-rose-200 rounded-2xl flex items-center justify-center shadow-lg mr-3 border border-white/30">
+            <div className="w-12 h-12 bg-linear-to-br from-white to-rose-200 rounded-2xl flex items-center justify-center shadow-lg mr-3 border border-white/30">
               <div className="text-[#1360bb] font-bold text-lg">🦜</div>
             </div>
-            <h3 className="text-3xl font-black bg-gradient-to-r from-white to-rose-200 bg-clip-text text-transparent">
+            <h3 className="text-3xl font-black bg-linear-to-r from-white to-rose-200 bg-clip-text text-transparent">
               AraraDelivery
             </h3>
           </div>
@@ -132,7 +132,7 @@ const Footer = () => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className="flex items-center mb-4 lg:mb-0">
-              <div className="w-6 h-6 bg-gradient-to-r from-white to-rose-200 rounded flex items-center justify-center mr-2 border border-white/30">
+              <div className="w-6 h-6 bg-linear-to-r from-white to-rose-200 rounded flex items-center justify-center mr-2 border border-white/30">
                 <span className="text-[#1360bb] text-xs font-bold">A</span>
               </div>
               <p className="text-white/70 text-sm">

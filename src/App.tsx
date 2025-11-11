@@ -42,7 +42,7 @@ function App() {
 							{/* Rotas de Categoria */}
 							<Route path="/categorias" element={<CategoriaPagina />} />
 							<Route path="/categorias/listar" element={<ListaCategorias />} />
-							<Route path="/categorias/cadastrar" element={<CategoriaPagina />} />
+							<Route path="/categorias/cadastrar" element={<FormCategoria />} />
 							<Route path="/categorias/deletar/:id" element={<DeletarCategoria />} />
 							<Route path="/categorias/editar/:id" element={<FormCategoria />} />
 

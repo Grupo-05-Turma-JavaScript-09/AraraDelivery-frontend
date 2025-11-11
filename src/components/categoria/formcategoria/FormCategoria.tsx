@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
-import { AuthContext } from "../../../contexts/AuthContext"; // ✅ adicionado
+import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { atualizar, buscar, cadastrar } from "../../../services/Services";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -10,8 +10,8 @@ import { ToastAlerta } from "../../../utils/ToastAlerta";
 function FormCategoria() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { usuario } = useContext(AuthContext); // ✅ adicionado
-  const token = usuario.token; // ✅ adicionado
+  const { usuario } = useContext(AuthContext);
+  const token = usuario.token;
 
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +19,7 @@ function FormCategoria() {
   async function buscarCategoriaPorId(id: string) {
     try {
       await buscar(`/categorias/${id}`, setCategoria, {
-        headers: { Authorization: token }, // ✅ adicionado
+        headers: { Authorization: token },
       });
     } catch (error) {
       ToastAlerta("Erro ao buscar a categoria.", "erro");
@@ -41,7 +41,7 @@ function FormCategoria() {
   }
 
   function retornar() {
-    navigate("/categorias"); // ✅ corrigido
+    navigate("/categorias");
   }
 
   async function gerarNovaCategoria(e: FormEvent<HTMLFormElement>) {
@@ -51,12 +51,12 @@ function FormCategoria() {
     try {
       if (id !== undefined) {
         await atualizar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token }, // ✅ adicionado
+          headers: { Authorization: token },
         });
         ToastAlerta("Categoria atualizada com sucesso!", "sucesso");
       } else {
         await cadastrar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token }, // ✅ adicionado
+          headers: { Authorization: token },
         });
         ToastAlerta("Categoria cadastrada com sucesso!", "sucesso");
       }
@@ -71,7 +71,7 @@ function FormCategoria() {
   return (
     <div className="min-h-screen bg-linear-to-br from-[#36BFB1] to-[#02735E] py-12 px-4">
       <div className="container flex flex-col items-center justify-center mx-auto max-w-2xl">
-        
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
