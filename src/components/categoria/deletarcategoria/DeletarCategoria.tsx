@@ -49,7 +49,7 @@ function DeletarCategoria() {
         headers: { Authorization: token },
       });
       ToastAlerta("Categoria deletada com sucesso!", "sucesso");
-      navigate("/categorias");
+      navigate("/categorias/listar");
     } catch (error: any) {
       if (error.response?.status === 401) {
         ToastAlerta("Sessão expirada. Faça login novamente.", "info");
@@ -81,7 +81,7 @@ function DeletarCategoria() {
           </button>
 
           <Link
-            to="/categorias"
+            to="/categorias/listar"
             className="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 transition"
           >
             Cancelar
