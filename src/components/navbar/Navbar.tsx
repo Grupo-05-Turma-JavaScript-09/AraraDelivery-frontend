@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
       {/* Faixa superior com gradiente - Representando as cores da arara */}
-      <div className="h-1 bg-gradient-to-r from-blue-600 via-amber-500 to-rose-600"></div>
+      <div className="h-1 bg-linear-to-r from-blue-600 via-amber-500 to-rose-600"></div>
       
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
@@ -23,14 +23,14 @@ const Navbar = () => {
           <Link to="/home" className="flex items-center space-x-3 group">
             <div className="relative">
               {/* Ícone da Arara  */}
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <div className="w-12 h-12 bg-linear-to-br from-blue-600 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                 <div className="text-white font-bold text-lg">🦜</div>
               </div>
               {/* Detalhe - Asa em movimento */}
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-400 rounded-full animate-pulse"></div>
             </div>
             <div className="text-left">
-              <h1 className="text-xl font-black bg-gradient-to-r from-blue-600 to-rose-600 bg-clip-text text-transparent">
+              <h1 className="text-xl font-black bg-linear-to-r from-blue-600 to-rose-600 bg-clip-text text-transparent">
                 AraraDelivery
               </h1>
               <p className="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -70,7 +70,7 @@ const Navbar = () => {
 
             {/* Usuário */}
             <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <span className="text-white font-bold text-sm">
                   {usuario.nome?.charAt(0) || 'U'}
                 </span>

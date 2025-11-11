@@ -82,7 +82,7 @@ const Home = () => {
           <div className="text-center text-white max-w-4xl mx-auto px-8">
             {/* "CONECTANDO O BRASIL REAL"*/}
             <div className="mb-16">
-              <div className="inline-flex items-center bg-gradient-to-r from-blue-600/95 to-rose-600/95 backdrop-blur-lg rounded-full px-10 py-5 border-2 border-white/50 shadow-2xl mb-8 [text-shadow:_0_4px_12px_rgb(0_0_0_/_90%)] transform hover:scale-105 transition-transform duration-300">
+              <div className="inline-flex items-center bg-linear-to-r from-blue-600/95 to-rose-600/95 backdrop-blur-lg rounded-full px-10 py-5 border-2 border-white/50 shadow-2xl mb-8 [text-shadow:_0_4px_12px_rgb(0_0_0_/_90%)] transform hover:scale-105 transition-transform duration-300">
                 <div className="w-4 h-4 bg-amber-300 rounded-full mr-4 animate-pulse shadow-lg"></div>
                 <span className="text-2xl font-bold tracking-wide drop-shadow-2xl">CONECTANDO O BRASIL REAL</span>
               </div>
