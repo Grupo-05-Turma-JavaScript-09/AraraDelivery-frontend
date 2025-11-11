@@ -13,7 +13,6 @@ import Login from './pages/login/Login'
 import Perfil from './pages/perfil/Perfil'
 import ProdutoPagina from './pages/produtopagina/ProdutoPagina'
 import SobreNos from './pages/sobrenos/Sobrenos'
-import FormProduto from './components/produto/formproduto/FormProduto'
 
 function App() {
 	return (
@@ -41,7 +40,9 @@ function App() {
 							{/* Rotas de Categoria */}
 							<Route path="/categorias" element={<CategoriaPagina />} />
 							<Route path="/categorias/listar" element={<ListaCategorias />} />
-							<Route path="/categorias/cadastrar" element={<CategoriaPagina />} />
+							<Route path="/categorias/cadastrar" element={<FormCategoria />} />
+							<Route path="/categorias/deletar/:id" element={<DeletarCategoria />} />
+							<Route path="/categorias/editar/:id" element={<FormCategoria />} />
 
             <Route path="/sobre" element={<SobreNos />} />
 
