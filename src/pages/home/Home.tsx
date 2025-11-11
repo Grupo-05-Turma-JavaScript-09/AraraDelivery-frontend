@@ -316,7 +316,7 @@ const handleExploreClick = () => {
                 </p>
                 <div className="flex flex-col gap-4">
                   <Link
-                    to="/parceiros"
+                    to="/cadastro"
                     className="bg-gradient-to-r from-blue-600 to-rose-600 text-white text-center py-4 rounded-xl font-bold hover:from-blue-700 hover:to-rose-700 transition-all duration-300 transform hover:scale-105"
                   >
                     Cadastre seu Negócio
