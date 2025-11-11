@@ -1,16 +1,19 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const NavbarPrivate = () => {
   const { usuario, handleLogout } = useContext(AuthContext);
   const location = useLocation();
-
+  const navigate = useNavigate();
   // Só mostra navbar se usuário estiver logado
   if (!usuario) {
     return null;
   }
-
+  function deslogar() {
+    handleLogout();
+    navigate('/login');
+  }
   return (
     <nav className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
       {/* Faixa superior com gradiente - Representando as cores da arara */}
@@ -85,7 +88,7 @@ const NavbarPrivate = () => {
 
             {/* Botão Sair */}
             <button 
-              onClick={handleLogout}
+              onClick={deslogar}
               className="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl hover:bg-gray-200 transition-all duration-300 font-medium text-sm border border-gray-300 hover:border-gray-400 flex items-center space-x-2"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
