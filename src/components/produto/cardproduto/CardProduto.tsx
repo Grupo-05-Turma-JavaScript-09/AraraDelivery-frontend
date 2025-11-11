@@ -8,8 +8,34 @@ interface CardProdutoProps{
 function CardProduto({produto}: CardProdutoProps) {
     return (
         <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-            <header className='py-2 px-6 bg-indigo-800 text-white font-bold text-2xl'>{produto.nome}</header>
-            <p className='p-8 text-3xl bg-slate-200 h-full'>{produto.descricao}</p>
+
+            <header className='py-2 px-6 bg-indigo-800 text-white font-bold text-2xl'>
+                {produto.nome}
+            </header>
+
+            {/* Conteúdo lado a lado */}
+            <div className="flex bg-slate-200 p-4 gap-4">
+
+                {/* Foto */}
+                <div className="w-40 h-40 bg-gray-100 rounded-xl overflow-hidden">
+                    {produto.foto ? (
+                        <img 
+                            src={produto.foto} 
+                            alt={produto.nome}
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-500">
+                            Sem imagem
+                        </div>
+                    )}
+                </div>
+
+                {/* Descrição */}
+                <p className='text-xl flex-1'>
+                    {produto.descricao}
+                </p>
+            </div>
 
             <div className="flex">
                 <Link to={`/editarproduto/${produto.id}`}
