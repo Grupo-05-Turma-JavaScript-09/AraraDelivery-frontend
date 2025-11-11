@@ -1,47 +1,54 @@
-import { PencilSimple, Trash } from "@phosphor-icons/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import type Categoria from "../../../models/Categoria";
+import ModalProdutosCategoria from "../modalcategoria/ModalProdutosCategoria";
 
 interface CardCategoriaProps {
   categoria: Categoria;
 }
 
 function CardCategoria({ categoria }: CardCategoriaProps) {
+  const [mostrarModal, setMostrarModal] = useState(false);
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 hover:shadow-md hover:border-[#36BFB1]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-      {/* Cabeçalho */}
-      <header className="bg-linear-to-r from-[#02735E] to-[#36BFB1] text-white text-center py-4">
-        <h2 className="text-lg font-semibold tracking-wide uppercase">
-          Categoria
-        </h2>
-      </header>
-
-      {/* Corpo */}
-      <div className="flex flex-col items-center justify-center px-8 py-10 bg-linear-to-b from-white to-[#F8F9F9]">
-        <p className="text-2xl font-bold text-[#014034] text-center">
+    <>
+      <div className="border rounded-3xl shadow-md bg-white hover:shadow-lg transition-all duration-200 flex flex-col justify-between p-6 text-center">
+        <h3 className="text-2xl font-semibold text-[#014034] mb-4">
           {categoria.nome}
-        </p>
+        </h3>
+
+        <div className="flex flex-col gap-3 mt-auto">
+          <button
+            onClick={() => setMostrarModal(true)}
+            className="py-2 rounded-xl bg-gradient-to-r from-[#36BFB1] to-[#02735E] text-white font-semibold hover:from-[#2ba89a] hover:to-[#02624f] transition"
+          >
+            Ver Detalhes
+          </button>
+
+          <div className="flex justify-center gap-3">
+            <Link
+              to={`/categorias/editar/${categoria.id}`}
+              className="px-4 py-2 bg-[#02735E] text-white rounded-lg hover:bg-[#014034] transition text-sm"
+            >
+              Editar
+            </Link>
+            <Link
+              to={`/categorias/deletar/${categoria.id}`}
+              className="px-4 py-2 border border-red-400 text-red-600 rounded-lg hover:bg-red-50 transition text-sm"
+            >
+              Deletar
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {/* Ações */}
-      <div className="flex items-center justify-between gap-3 px-6 py-4 border-t border-gray-100 bg-[#F9FAFA]">
-        <Link
-          to={`/categorias/editar/${categoria.id}`}
-          className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-linear-to-r from-[#36BFB1] to-[#02735E] text-white font-medium shadow hover:from-[#2aa698] hover:to-[#025b49] hover:shadow-md transition-all duration-200"
-        >
-          <PencilSimple size={18} weight="bold" />
-          Editar
-        </Link>
-
-        <Link
-          to={`/categorias/deletar/${categoria.id}`}
-          className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-red-500 text-red-600 font-medium hover:bg-red-50 hover:shadow transition-all duration-200"
-        >
-          <Trash size={18} weight="bold" />
-          Deletar
-        </Link>
-      </div>
-    </div>
+      {mostrarModal && (
+        <ModalProdutosCategoria
+          idCategoria={categoria.id}
+          onClose={() => setMostrarModal(false)}
+        />
+      )}
+    </>
   );
 }
 
