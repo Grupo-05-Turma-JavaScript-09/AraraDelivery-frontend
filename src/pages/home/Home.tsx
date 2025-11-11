@@ -1,52 +1,108 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const videoRefs = useRef([]);
   
-  const images = [
-    'https://i.imgur.com/CpnMqRb.jpeg',
-    'https://i.imgur.com/6myE9Xr.jpeg', 
-    'https://i.imgur.com/m5XfUG8.jpeg'
+  const videos = [
+    {
+      url: 'https://i.imgur.com/3YG79Xe.mp4',
+      name: 'hamburguer'
+    },
+    {
+      url: 'https://i.imgur.com/aXsPu3k.mp4', 
+      name: 'comida br'
+    },
+    {
+      url: 'https://i.imgur.com/Aiaisu6.mp4',
+      name: 'pizza'
+    },
+    {
+      url: 'https://i.imgur.com/RJLGoLm.mp4',
+      name: 'arara'
+    }
   ];
 
-  // Rotação automática das imagens - 5 SEGUNDOS
+  // Rotação automática dos vídeos - 8 SEGUNDOS
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    }, 8000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [videos.length]);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  // Pausar vídeo anterior e play no atual
+  useEffect(() => {
+    videoRefs.current.forEach((video, index) => {
+      if (video) {
+        if (index === currentVideoIndex) {
+          video.play().catch(e => console.log('Autoplay prevented:', e));
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
+    });
+  }, [currentVideoIndex]);
+
+  const nextVideo = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
   };
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  const prevVideo = () => {
+    setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length);
+  };
+
+  const handleVideoLoad = (index) => {
+    if (index === currentVideoIndex) {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-white">
       
-      {/* CARROSSEL*/}
+      {/* CARROSSEL DE VÍDEOS */}
       <section className="relative h-[80vh] min-h-[600px] overflow-hidden">
-        {/* Imagem do Carrossel */}
-        <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
-          <img
-            src={images[currentImageIndex]}
-            alt="AraraDelivery conectando pessoas"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {/* Vídeos do Carrossel */}
+        {videos.map((video, index) => (
+          <div
+            key={video.url}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentVideoIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {isLoading && index === currentVideoIndex && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center z-10">
+                <div className="text-gray-500">Carregando vídeo...</div>
+              </div>
+            )}
+            <video
+              ref={el => videoRefs.current[index] = el}
+              src={video.url}
+              className="w-full h-full object-cover"
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onLoadedData={() => handleVideoLoad(index)}
+              onError={() => {
+                console.log('Erro ao carregar vídeo:', video.name);
+                setIsLoading(false);
+              }}
+            />
+          </div>
+        ))}
 
-        {/* Overlay escuro para melhorar legibilidade dos textos */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Overlay gradiente para melhor legibilidade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-5"></div>
 
         {/* Botões de Navegação */}
         <button
-          onClick={prevImage}
+          onClick={prevVideo}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 p-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-20 border border-gray-200"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +110,7 @@ const Home = () => {
           </svg>
         </button>
         <button
-          onClick={nextImage}
+          onClick={nextVideo}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 p-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-20 border border-gray-200"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,12 +120,12 @@ const Home = () => {
 
         {/* Indicadores */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-          {images.map((_, index) => (
+          {videos.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentImageIndex(index)}
+              onClick={() => setCurrentVideoIndex(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 border border-gray-300 ${
-                index === currentImageIndex 
+                index === currentVideoIndex 
                   ? 'bg-amber-500 scale-125 shadow-lg' 
                   : 'bg-white/90 hover:bg-white'
               }`}
@@ -77,42 +133,41 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Conteúdo CENTRALIZADO - TODOS OS TEXTOS COM MÁXIMA LEGIBILIDADE */}
+        {/* Conteúdo CENTRALIZADO - TEXTO MAIS LIMPO */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="text-center text-white max-w-4xl mx-auto px-8">
-            {/* "CONECTANDO O BRASIL REAL"*/}
-            <div className="mb-16">
-              <div className="inline-flex items-center bg-linear-to-r from-blue-600/95 to-rose-600/95 backdrop-blur-lg rounded-full px-10 py-5 border-2 border-white/50 shadow-2xl mb-8 [text-shadow:_0_4px_12px_rgb(0_0_0_/_90%)] transform hover:scale-105 transition-transform duration-300">
-                <div className="w-4 h-4 bg-amber-300 rounded-full mr-4 animate-pulse shadow-lg"></div>
-                <span className="text-2xl font-bold tracking-wide drop-shadow-2xl">CONECTANDO O BRASIL REAL</span>
+            {/* "CONECTANDO O BRASIL REAL" - MAIS SUAVE */}
+            <div className="mb-12">
+              <div className="inline-flex items-center bg-white/20 backdrop-blur-lg rounded-full px-8 py-4 border border-white/30 shadow-2xl mb-6 transform hover:scale-105 transition-transform duration-300">
+                <div className="w-3 h-3 bg-amber-300 rounded-full mr-3 animate-pulse"></div>
+                <span className="text-xl font-semibold tracking-wide">CONECTANDO O BRASIL REAL</span>
               </div>
             </div>
             
-            {/* TÍTULO PRINCIPAL - SOMBRA FORTE */}
-            <h1 className="text-5xl md:text-7xl font-black mb-8 leading-tight drop-shadow-2xl [text-shadow:_0_4px_20px_rgb(0_0_0_/_95%)]">
-              Onde a <span className="text-amber-300 drop-shadow-2xl">distância</span><br />
+            {/* TÍTULO PRINCIPAL - MAIS LIMPO */}
+            <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-2xl">
+              Onde a <span className="text-amber-300">distância</span><br />
               não é mais limite
             </h1>
             
-            {/* DESCRIÇÃO - SOMBRA FORTE */}
-            <p className="text-xl md:text-2xl mb-12 leading-relaxed max-w-3xl mx-auto drop-shadow-2xl [text-shadow:_0_3px_10px_rgb(0_0_0_/_90%)]">
-              Levar não é só nossa função, é nossa missão. 
-              <span className="text-amber-200 font-semibold drop-shadow-2xl"> Conectamos pessoas</span> com acesso a produtos essenciais.
+            {/* DESCRIÇÃO SIMPLIFICADA */}
+            <p className="text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto opacity-90">
+             A entrega que cruza horizontes
             </p>
 
-            {/* BOTÕES - ELEMENTOS SÓLIDOS */}
+            {/* BOTÕES - DESIGN MAIS CLEAN */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/produtos"
-                className="bg-amber-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl border-2 border-amber-400"
+                className="bg-amber-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-amber-400"
               >
                 Explorar Produtos
               </Link>
               <Link
                 to="/sobre"
-                className="bg-white/95 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl border-2 border-white"
+                className="bg-transparent text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border-2 border-white"
               >
-                Conheça Nossa História
+                Nossa História
               </Link>
             </div>
           </div>
