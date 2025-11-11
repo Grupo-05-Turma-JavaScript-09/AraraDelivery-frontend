@@ -17,6 +17,7 @@ import FormCategoria from './components/categoria/formcategoria/FormCategoria'
 import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria'
 import FormProduto from './components/produto/formproduto/FormProduto'
 import DeletarProduto from './components/produto/deletarproduto/DeletarProduto'
+import SejaEntregador from './pages/entregador/SejaEntregador'
 
 function App() {
 	return (
@@ -31,7 +32,8 @@ function App() {
 							<Route path="/" element={<Login />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/cadastro" element={<Cadastro />} />
-							
+			  				<Route path="/entregador" element={<SejaEntregador />} />	
+												
 							{/* Rotas privadas */}
 							<Route path="/home" element={<Home />} />
 							<Route path="/perfil" element={<Perfil />} />
