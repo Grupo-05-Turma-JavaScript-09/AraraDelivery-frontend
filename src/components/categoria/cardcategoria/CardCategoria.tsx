@@ -9,39 +9,81 @@ interface CardCategoriaProps {
 
 function CardCategoria({ categoria }: CardCategoriaProps) {
   const [mostrarModal, setMostrarModal] = useState(false);
+  const totalProdutos = categoria.produtos?.length || 0;
 
   return (
     <>
-      <div className="border rounded-3xl shadow-md bg-white hover:shadow-lg transition-all duration-200 flex flex-col justify-between p-6 text-center">
-        <h3 className="text-2xl font-semibold text-[#014034] mb-4">
-          {categoria.nome}
-        </h3>
+      <div className="bg-gray-50 p-6 rounded-3xl transition-all duration-300 hover:bg-gray-100">
+        {/* Card principal */}
+        <div className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.01] overflow-hidden flex flex-col p-8 text-center">
+          {/* Nome da categoria */}
+          <h3 className="text-2xl font-bold text-blue-950 mb-2">
+            {categoria.nome}
+          </h3>
 
-        <div className="flex flex-col gap-3 mt-auto">
-          <button
-            onClick={() => setMostrarModal(true)}
-            className="py-2 rounded-xl bg-gradient-to-r from-[#36BFB1] to-[#02735E] text-white font-semibold hover:from-[#2ba89a] hover:to-[#02624f] transition"
+          {/* Quantidade de produtos */}
+          <p
+            className={`text-sm font-medium mb-6 ${
+              totalProdutos > 0 ? "text-teal-700" : "text-gray-500"
+            }`}
           >
-            Ver Detalhes
-          </button>
+            {totalProdutos > 0
+              ? `${totalProdutos} produto${
+                  totalProdutos !== 1 ? "s" : ""
+                } cadastrados`
+              : "Nenhum produto cadastrado"}
+          </p>
 
-          <div className="flex justify-center gap-3">
-            <Link
-              to={`/categorias/editar/${categoria.id}`}
-              className="px-4 py-2 bg-[#02735E] text-white rounded-lg hover:bg-[#014034] transition text-sm"
+          {/* Botões */}
+          <div className="flex flex-col items-center gap-4 mt-auto">
+            <button
+              onClick={() => setMostrarModal(true)}
+              className="w-full flex-1 bg-gradient-to-r from-sky-700 to-cyan-600 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
             >
-              Editar
-            </Link>
-            <Link
-              to={`/categorias/deletar/${categoria.id}`}
-              className="px-4 py-2 border border-red-400 text-red-600 rounded-lg hover:bg-red-50 transition text-sm"
-            >
-              Deletar
-            </Link>
+              Ver Detalhes
+            </button>
+
+            <div className="grid grid-cols-2 gap-4 w-full">
+              <Link
+                to={`/categorias/editar/${categoria.id}`}
+                className="text-center py-3 bg-gray-50 hover:bg-yellow-600 border border-blue-100 text-gray-700 hover:text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-md"
+              >
+                Editar
+              </Link>
+
+              <Link
+                to={`/categorias/deletar/${categoria.id}`}
+                className="text-center py-3 bg-red-50 hover:bg-red-600 border border-red-100 text-red-800 hover:text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-md"
+              >
+                Deletar
+              </Link>
+            </div>
+          </div>
+
+          {/* Rodapé */}
+          <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full" />
+                <span>Atualizado recentemente</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-blue-500 rounded-full" />
+                <span>
+                  {totalProdutos > 0
+                    ? `${totalProdutos} item${totalProdutos !== 1 ? "s" : ""}`
+                    : "Sem produtos"}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1 hover:text-blue-600 cursor-pointer transition-colors">
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Modal de produtos */}
       {mostrarModal && (
         <ModalProdutosCategoria
           idCategoria={categoria.id}

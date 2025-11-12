@@ -80,12 +80,36 @@ function FormCategoria() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#fdfdfd] to-[#f5f5f5] flex items-center justify-center py-12 px-6">
-      <div className="bg-white shadow-md rounded-2xl w-full max-w-md p-8 border border-gray-200">
-        <h1 className="text-3xl font-bold text-[#014034] mb-8 text-center">
-          {id ? "Editar Categoria" : "Cadastrar Categoria"}
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-12 px-6">
+      <div className="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 border border-blue-100">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-sky-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <svg
+              className="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            {id ? "Editar Categoria" : "Cadastrar Categoria"}
+          </h1>
+          <p className="text-gray-600 mt-2 text-sm">
+            {id
+              ? "Atualize as informações da categoria"
+              : "Adicione uma nova categoria ao catálogo"}
+          </p>
+        </div>
 
+        {/* Form */}
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <label htmlFor="nome" className="font-semibold text-gray-700">
@@ -97,18 +121,28 @@ function FormCategoria() {
               name="nome"
               value={categoria.nome}
               onChange={atualizarEstado}
-              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#02735E]"
+              className="border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition"
               placeholder="Ex: Bebidas, Sobremesas..."
               required
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-linear-to-r from-[#36BFB1] to-[#02735E] text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-[#2aa698] hover:to-[#025b49] transition-all"
-          >
-            {id ? "Salvar Alterações" : "Cadastrar"}
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 mt-2">
+            <button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-blue-600 to-teal-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
+            >
+              {id ? "Salvar Alterações" : "Cadastrar"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate("/categorias")}
+              className="flex-1 border-2 border-blue-400 text-blue-700 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all"
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
