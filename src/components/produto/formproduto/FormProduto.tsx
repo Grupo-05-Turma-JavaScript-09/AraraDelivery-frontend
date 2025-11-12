@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   useEffect,
   useState,
@@ -182,9 +184,9 @@ function FormProduto() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white from-50% to-amber-100 to-50% py-8">
+    <div className="min-h-screen bg-linear-to-br from-white from-50% to-amber-100 to-50% py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 bg-gradient-to-r from-blue-600 to-rose-600 rounded-3xl p-8 shadow-2xl border border-white/20">
+        <div className="text-center mb-12 bg-linear-to-r from-blue-600 to-rose-600 rounded-3xl p-8 shadow-2xl border border-white/20">
           <div className="flex items-center justify-center mb-6">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mr-4 border border-white/30">
               <div className="text-white font-bold text-2xl">🦜</div>
@@ -310,7 +312,7 @@ function FormProduto() {
             <button
               type="submit"
               disabled={isLoading || isLoadingCategorias}
-              className="bg-gradient-to-r from-blue-600 to-rose-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-rose-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 mt-4 group"
+              className="bg-linear-to-r from-blue-600 to-rose-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-rose-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 mt-4 group"
             >
               {isLoading ? (
                 <>
