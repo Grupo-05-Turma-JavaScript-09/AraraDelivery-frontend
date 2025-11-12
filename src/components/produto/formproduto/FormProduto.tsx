@@ -70,7 +70,7 @@ function FormProduto() {
       const carregar = (dados: Produto) => {
         setProduto({
           ...dados,
-          preco: dados.preco ?? 0, 
+          preco: Number(dados.preco) || 0, 
         });
       };
 
@@ -101,6 +101,26 @@ function FormProduto() {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const { name, value, type } = e.target;
+    
+    if (name === "preco") {
+      // Remove tudo exceto números
+      const apenasNumeros = value.replace(/\D/g, "");
+      
+      if (apenasNumeros === "") {
+        setProduto((prev) => ({ ...prev, preco: 0 }));
+        return;
+      }
+      
+      // Converte para número com centavos
+      const valorNumerico = Number(apenasNumeros) / 100;
+      
+      setProduto((prev) => ({
+        ...prev,
+        preco: valorNumerico,
+      }));
+      return;
+    }
+    
     setProduto((prev) => ({
       ...prev,
       [name]:
@@ -110,6 +130,19 @@ function FormProduto() {
             : Number(value)
           : value,
     }));
+  }
+  
+  function formatarPreco(valor: number | undefined): string {
+    try {
+      if (valor === undefined || valor === null || isNaN(valor)) return "";
+      if (valor === 0) return "0,00";
+      const numeroValido = Number(valor);
+      if (isNaN(numeroValido)) return "";
+      return numeroValido.toFixed(2).replace(".", ",");
+    } catch (error) {
+      console.error("Erro ao formatar preço:", error);
+      return "";
+    }
   }
 
   function selecionarCategoria(e: ChangeEvent<HTMLSelectElement>) {
@@ -162,15 +195,15 @@ function FormProduto() {
         });
 
         ToastAlerta("Produto atualizado com sucesso!", "sucesso");
+        navigate("/produtos/listar");
       } else {
         await cadastrar("/produtos", produtoParaEnviar, () => {}, {
           headers: { Authorization: token },
         });
 
         ToastAlerta("Produto cadastrado com sucesso!", "sucesso");
+        navigate("/produtos");
       }
-
-      navigate("/produtos");
     } catch (err: any) {
       if (err.response?.status === 401) {
         ToastAlerta("Sessão expirada. Faça login novamente.", "info");
@@ -231,14 +264,12 @@ function FormProduto() {
                 Preço (R$)
               </label>
               <input
-                type="number"
+                type="text"
                 id="preco"
                 name="preco"
-                placeholder="0.00"
-                value={produto.preco !== undefined ? produto.preco : ""}
+                placeholder="0,00"
+                value={formatarPreco(produto.preco)}
                 onChange={atualizarEstado}
-                step="0.01"
-                min="0"
                 required
                 className="border-2 border-gray-200 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 placeholder-gray-400"
               />

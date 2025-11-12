@@ -12,13 +12,13 @@ function DeletarProduto() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [produto, setProduto] = useState<Produto>({
-  id: 0,
-  nome: '',
-  preco: 0,
-  descricao: '',
-  foto: '',
-  categoria: {} as Categoria,
-  usuario: {} as Usuario,
+    id: 0,
+    nome: "",
+    preco: 0,
+    descricao: "",
+    foto: "",
+    categoria: {} as Categoria,
+    usuario: {} as Usuario,
   });
 
   const { usuario, handleLogout } = useContext(AuthContext);
@@ -68,18 +68,58 @@ function DeletarProduto() {
     }
   }
 
+  const formatarPreco = (preco: number) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(preco);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#fdfdfd] to-[#f5f5f5] px-6">
-      <div className="bg-white shadow-md rounded-2xl p-10 max-w-md w-full border border-gray-200 text-center">
-        <h1 className="text-3xl font-bold text-[#014034] mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 px-6">
+      <div className="bg-white shadow-lg rounded-3xl p-10 max-w-md w-full border border-gray-200 text-center space-y-6">
+        <h1 className="text-3xl font-bold text-indigo-900">
           Deletar Produto
         </h1>
 
-        <p className="text-gray-700 mb-8">
+        {/* Card visual do produto (sem ID e cabeçalho) */}
+        <div className="group bg-white rounded-3xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between">
+          <div className="p-6 flex flex-col justify-between flex-1">
+            <div className="w-full h-44 bg-gray-100 rounded-2xl overflow-hidden mb-5">
+              {produto.foto ? (
+                <img
+                  src={produto.foto}
+                  alt={produto.nome}
+                  className="w-full h-full object-cover object-center group-hover:scale-101 transition-transform duration-500"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-500 bg-linear-to-br from-gray-50 to-gray-100">
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-gray-400 text-xl">📷</span>
+                    </div>
+                    <p className="text-xs text-gray-400">Sem imagem</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight mb-2">
+              {produto.nome}
+            </h2>
+            <span className="text-lg font-semibold text-indigo-900">
+              {formatarPreco(produto.preco)}
+            </span>
+          </div>
+        </div>
+
+        {/* Mensagem de confirmação */}
+        <p className="text-gray-700">
           Tem certeza que deseja excluir o produto{" "}
-          <span className="font-semibold text-[#02735E]">{produto.nome}</span>?
+          <span className="font-semibold text-indigo-900">{produto.nome}</span>?
         </p>
 
+        {/* Botões de ação */}
         <div className="flex gap-4 justify-center">
           <button
             onClick={deletarProduto}
