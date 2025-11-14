@@ -7,8 +7,9 @@ const NavbarPrivate = () => {
   const location = useLocation();
   const navigate = useNavigate();
   // Só mostra navbar se usuário estiver logado
-  if (!usuario) {
-    return null;
+ if (!usuario?.token) {
+  return null;
+
   }
   function deslogar() {
     handleLogout();

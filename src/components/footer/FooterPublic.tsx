@@ -5,7 +5,7 @@ const FooterPublic = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-white/30 via-amber-400 to-rose-400"></div>
       
       {/* Padrão de fundo sutil */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="w-full h-full" style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, #ffffff 1px, transparent 1px),
                           radial-gradient(circle at 75% 75%, #EC4899 1px, transparent 1px)`,

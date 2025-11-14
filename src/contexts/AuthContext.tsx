@@ -1,8 +1,11 @@
-import { createContext, type ReactNode, useState } from "react"
-import type UsuarioLogin from "../models/UsuarioLogin"
-import { login } from "../services/Services"
-import { ToastAlerta } from "../utils/ToastAlerta"
+import { createContext, useState, useEffect, type ReactNode } from "react";
+import type UsuarioLogin from "../models/UsuarioLogin";
+import { login } from "../services/Services";
+import { ToastAlerta } from "../utils/ToastAlerta";
 
+// ==========================
+// Tipagem
+// ==========================
 export interface AuthContextProps {
   usuario: UsuarioLogin;
   setUsuario: React.Dispatch<React.SetStateAction<UsuarioLogin>>;
@@ -12,59 +15,89 @@ export interface AuthContextProps {
 }
 
 interface AuthProviderProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext({} as AuthContextProps)
+// ==========================
+// Criação do contexto
+// ==========================
+export const AuthContext = createContext({} as AuthContextProps);
 
+// ==========================
+// Provider
+// ==========================
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [usuario, setUsuario] = useState<UsuarioLogin>({
-        id: 0,
-        nome: "",
-        usuario: "",
-        senha: "",
-        foto: "",
-        token: ""
-    })
-
-    const [isLoading, setIsLoading] = useState(false)
-
-    async function handleLogin(usuarioLogin: UsuarioLogin) {
-        setIsLoading(true)
-        try {
-            await login(`/usuarios/logar`, usuarioLogin, setUsuario)
-            ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso")
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
-            ToastAlerta("Os dados do Usuário estão inconsistentes!", "erro")
-        }
-        setIsLoading(false)
+  // --------------------------
+  // 1. Estado persistente
+  // --------------------------
+  const [usuario, setUsuario] = useState<UsuarioLogin>(() => {
+    const userStorage = localStorage.getItem("usuario");
+    if (userStorage) {
+      return JSON.parse(userStorage);
     }
+    return {
+      id: 0,
+      nome: "",
+      usuario: "",
+      senha: "",
+      foto: "",
+      token: ""
+    };
+  });
 
-    function handleLogout() {
-        setUsuario({
-            id: 0,
-            nome: "",
-            usuario: "",
-            senha: "",
-            foto: "",
-            token: ""
-        })
+  const [isLoading, setIsLoading] = useState(false);
+
+  // --------------------------
+  // 2. Salvar mudanças no usuario
+  // --------------------------
+  useEffect(() => {
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+  }, [usuario]);
+
+  // --------------------------
+  // 3. LOGIN
+  // --------------------------
+  async function handleLogin(usuarioLogin: UsuarioLogin) {
+    setIsLoading(true);
+    try {
+      await login(`/usuarios/logar`, usuarioLogin, setUsuario);
+      ToastAlerta("Usuário autenticado com sucesso!", "sucesso");
+    } catch (error) {
+      ToastAlerta("Os dados do Usuário estão inconsistentes!", "erro");
     }
+    setIsLoading(false);
+  }
 
-   return (
-  <AuthContext.Provider
-    value={{
-      usuario,
-      setUsuario,      
-      handleLogin,
-      handleLogout,
-      isLoading
-    }}
-  >
-    {children}
-  </AuthContext.Provider>
-);
+  // --------------------------
+  // 4. LOGOUT
+  // --------------------------
+  function handleLogout() {
+    localStorage.removeItem("usuario");
+    setUsuario({
+      id: 0,
+      nome: "",
+      usuario: "",
+      senha: "",
+      foto: "",
+      token: ""
+    });
+  }
+
+  // --------------------------
+  // Provider com tudo pronto
+  // --------------------------
+  return (
+    <AuthContext.Provider
+      value={{
+        usuario,
+        setUsuario,
+        handleLogin,
+        handleLogout,
+        isLoading
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
