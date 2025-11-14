@@ -2,9 +2,10 @@ import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 import { ToastAlerta } from "../../utils/ToastAlerta"
 
-function Brindes() {
+function Brinde() {
   const { usuario } = useContext(AuthContext)
 
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
  const pontos = (usuario as any).pontos ?? 120
 
   function handleResgatar(tipo: string) {
@@ -105,4 +106,4 @@ function Brindes() {
   )
 }
 
-export default Brindes
+export default Brinde
