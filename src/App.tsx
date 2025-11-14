@@ -18,6 +18,7 @@ import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCat
 import FormProduto from './components/produto/formproduto/FormProduto'
 import DeletarProduto from './components/produto/deletarproduto/DeletarProduto'
 import SejaEntregador from './pages/entregador/SejaEntregador'
+import Brindes from './pages/brindes/Brindes'
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 							{/* Rotas privadas */}
 							<Route path="/home" element={<Home />} />
 							<Route path="/perfil" element={<Perfil />} />
+							<Route path="/brindes" element={<Brindes />} />
 							
 							{/* Rotas de Produto */}
 							<Route path="/produtos" element={<ProdutoPagina />} />
