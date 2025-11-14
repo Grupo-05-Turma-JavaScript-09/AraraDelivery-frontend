@@ -5,7 +5,7 @@ import { ToastAlerta } from "../../utils/ToastAlerta"
 function Brindes() {
   const { usuario } = useContext(AuthContext)
 
-  const pontos = usuario.pontos ?? 120 // Exemplo caso não tenha no backend ainda
+ const pontos = (usuario as any).pontos ?? 120
 
   function handleResgatar(tipo: string) {
     ToastAlerta(`Você tentou resgatar: ${tipo}. Sistema ainda em desenvolvimento!`, "info")
