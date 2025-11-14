@@ -5,7 +5,6 @@ import ListaCategorias from './components/categoria/listacategoria/ListaCategori
 import Footer from './components/footer/Footer'
 import { Navbar }from './components/navbar/Navbar'
 import ListaProdutos from './components/produto/listaproduto/ListaProduto'
-import { AuthProvider } from './contexts/AuthContext'
 import Cadastro from './pages/cadastro/Cadastro'
 import CategoriaPagina from './pages/categoriapagina/CategoriaPagina'
 import Home from './pages/home/Home'
@@ -23,7 +22,7 @@ import Brindes from './pages/brindes/Brindes'
 function App() {
 	return (
 		<>
-			<AuthProvider>
+			
 				<ToastContainer />
 				<BrowserRouter>
 					<Navbar />
