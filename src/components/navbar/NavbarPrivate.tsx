@@ -74,9 +74,9 @@ const NavbarPrivate = () => {
             </NavLink>
           </div>
 
-          {/* Área do Usuário - Humanizada */}
+          {/* Área do Usuário */}
           <div className="flex items-center space-x-4">
-            {/* Status de Impacto */}
+
             <div className="hidden lg:flex items-center space-x-2 bg-amber-50 rounded-full px-4 py-2 border border-amber-200">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-amber-700">
@@ -84,14 +84,15 @@ const NavbarPrivate = () => {
               </span>
             </div>
 
-            {/* Usuário */}
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            {/* Avatar + Nome, escondidos no mobile */}
+            <div className="hidden md:flex items-center space-x-3 group cursor-pointer">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white font-bold text-sm">
                   {usuario.nome?.charAt(0) || 'U'}
                 </span>
               </div>
-              <div className="hidden sm:block text-left">
+
+              <div className="text-left">
                 <p className="text-sm font-semibold text-gray-900">
                   {usuario.nome?.split(' ')[0] || 'Amigo'}
                 </p>
@@ -136,6 +137,7 @@ const NavbarPrivate = () => {
 };
 
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MobileItem = ({ to, children, onClick }: any) => (
   <Link
     to={to}
