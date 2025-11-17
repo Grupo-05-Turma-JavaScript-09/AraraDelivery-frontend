@@ -80,11 +80,11 @@ function FormCategoria() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-12 px-6">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-12 px-6">
       <div className="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 border border-blue-100">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-sky-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <div className="w-20 h-20 bg-linear-to-br from-blue-500 to-sky-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <svg
               className="w-10 h-10 text-white"
               fill="none"
@@ -130,7 +130,7 @@ function FormCategoria() {
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <button
               type="submit"
-              className="flex-1 bg-gradient-to-r from-blue-600 to-teal-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
+              className="flex-1 bg-linear-to-r from-blue-600 to-teal-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
             >
               {id ? "Salvar Alterações" : "Cadastrar"}
             </button>

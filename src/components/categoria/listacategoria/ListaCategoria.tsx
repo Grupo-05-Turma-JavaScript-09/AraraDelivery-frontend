@@ -42,8 +42,8 @@ function ListaCategorias() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#fdfdfd] to-[#f5f5f5]">
-      {/* SESSÃO FIXA SUPERIOR - Branca e limpa */}
+    <div className="min-h-screen bg-linear-to-br from-[#fdfdfd] to-[#f5f5f5]">
+      {/* SESSÃO FIXA SUPERIOR */}
       <div className="bg-white px-6 py-6 shadow-sm border-b border-gray-200">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
