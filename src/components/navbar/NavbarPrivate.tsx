@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -6,6 +6,9 @@ const NavbarPrivate = () => {
   const { usuario, handleLogout } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
+
   // Só mostra navbar se usuário estiver logado
  if (!usuario?.token) {
   return null;
@@ -15,6 +18,15 @@ const NavbarPrivate = () => {
     handleLogout();
     navigate('/login');
   }
+
+  function toggleMenu() {
+    setIsOpen(!isOpen);
+  }
+
+  function closeMenu() {
+    setIsOpen(false);
+  }
+
   return (
     <nav className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
       {/* Faixa superior com gradiente - Representando as cores da arara */}
@@ -24,7 +36,7 @@ const NavbarPrivate = () => {
         <div className="flex justify-between items-center py-4">
           
           {/* Logo com Identidade Forte */}
-          <Link to="/home" className="flex items-center space-x-3 group">
+          <Link to="/home" className="flex items-center space-x-3 group" onClick={closeMenu}>
             <div className="relative">
               {/* Ícone da Arara  */}
               <div className="w-12 h-12 bg-linear-to-br from-blue-600 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -62,9 +74,9 @@ const NavbarPrivate = () => {
             </NavLink>
           </div>
 
-          {/* Área do Usuário - Humanizada */}
+          {/* Área do Usuário */}
           <div className="flex items-center space-x-4">
-            {/* Status de Impacto */}
+
             <div className="hidden lg:flex items-center space-x-2 bg-amber-50 rounded-full px-4 py-2 border border-amber-200">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-amber-700">
@@ -72,14 +84,15 @@ const NavbarPrivate = () => {
               </span>
             </div>
 
-            {/* Usuário */}
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            {/* Avatar + Nome, escondidos no mobile */}
+            <div className="hidden md:flex items-center space-x-3 group cursor-pointer">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-rose-500 rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white font-bold text-sm">
                   {usuario.nome?.charAt(0) || 'U'}
                 </span>
               </div>
-              <div className="hidden sm:block text-left">
+
+              <div className="text-left">
                 <p className="text-sm font-semibold text-gray-900">
                   {usuario.nome?.split(' ')[0] || 'Amigo'}
                 </p>
@@ -99,17 +112,41 @@ const NavbarPrivate = () => {
             </button>
           </div>
 
-          {/* Menu Mobile */}
-          <button className="md:hidden text-gray-700 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+          {/* Botão Menu Mobile */}
+          <button className="md:hidden text-gray-700 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors" onClick={toggleMenu}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
       </div>
+
+      {/* MENU MOBILE */}
+        {isOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 px-4 py-3 space-y-3 animate-fadeIn">
+            
+            <MobileItem to="/home" onClick={closeMenu}>Início</MobileItem>
+            <MobileItem to="/produtos" onClick={closeMenu}>Produtos</MobileItem>
+            <MobileItem to="/categorias" onClick={closeMenu}>Categorias</MobileItem>
+            <MobileItem to="/perfil" onClick={closeMenu}>Perfil</MobileItem>
+
+          </div>
+        )}
     </nav>
   );
 };
+
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MobileItem = ({ to, children, onClick }: any) => (
+  <Link
+    to={to}
+    onClick={onClick}
+    className="block w-full text-gray-700 font-medium text-lg py-2 px-3 rounded-xl hover:bg-gray-100 transition-all"
+  >
+    {children}
+  </Link>
+);
 
 // Componente auxiliar para links com ícones
 const NavLink = ({ to, currentPath, children, icon }: { 
