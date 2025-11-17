@@ -38,7 +38,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
           <div className="flex flex-col items-center gap-4 mt-auto">
             <button
               onClick={() => setMostrarModal(true)}
-              className="w-full flex-1 bg-gradient-to-r from-sky-700 to-cyan-600 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
+              className="w-full flex-1 bg-linear-to-r from-sky-700 to-cyan-600 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-green-900 hover:to-teal-800 transition-all"
             >
               Ver Detalhes
             </button>
@@ -71,7 +71,7 @@ function CardCategoria({ categoria }: CardCategoriaProps) {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 <span>
                   {totalProdutos > 0
-                    ? `${totalProdutos} item${totalProdutos !== 1 ? "s" : ""}`
+                    ? `${totalProdutos} produto${totalProdutos !== 1 ? "s" : ""}`
                     : "Sem produtos"}
                 </span>
               </div>
