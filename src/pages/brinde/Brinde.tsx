@@ -16,15 +16,29 @@ function Brinde() {
       tipo: "Cupom de Desconto",
       imagem: "https://i.imgur.com/pR1flOj.jpeg",
       disponivel: pontos >= 80,
+      destaque: false
     },
     {
-      nome: "Arara de Pelúcia Colecionável",
+      nome: "chaveiro da arara",
       descricao: "Uma pelúcia exclusiva do Arara Delivery para sua coleção!",
+      pontos: 150,
+      tipo: "chaveiro da arara",
+      imagem: "https://i.imgur.com/3BrtltU.png",
+      disponivel: pontos >= 150,
+      destaque: false
+    },
+
+    // ⭐ NOVO BRINDE GRANDE EM DESTAQUE
+    {
+      nome: "Exclusivo Arara de Pelúcia",
+      descricao:
+      "Uma pelúcia exclusiva do Arara Delivery para sua coleção!",
       pontos: 250,
       tipo: "Arara de Pelúcia",
-      imagem: "https://i.imgur.com/aAXHoU3.jpeg",
+      imagem: "https://i.imgur.com/65qhFNw.jpeg",
       disponivel: pontos >= 250,
-    },
+      destaque: true
+    }
   ]
 
   function handleResgatar(tipo: string) {
@@ -32,24 +46,31 @@ function Brinde() {
   }
 
   const BrindeCard = ({ brinde }: { brinde: typeof brindes[0] }) => (
-    <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col transform hover:scale-105 transition-all">
-      
+    <div
+      className={`relative bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col transform hover:scale-105 transition-all
+        ${brinde.destaque ? "lg:col-span-2" : ""}`}
+    >
       {/* Imagem com overlay */}
-      <div className="h-56 w-full relative">
+      <div className={`${brinde.destaque ? "h-72" : "h-56"} w-full relative`}>
         <img
           src={brinde.imagem}
           alt={brinde.tipo}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        <h2 className="absolute bottom-4 left-6 text-2xl font-extrabold text-white drop-shadow-lg flex items-center gap-2">
+
+        <h2
+          className={`absolute bottom-4 left-6 ${
+            brinde.destaque ? "text-4xl" : "text-2xl"
+          } font-extrabold text-white drop-shadow-lg flex items-center gap-2`}
+        >
           {brinde.nome}
         </h2>
       </div>
 
       {/* Conteúdo */}
       <div className="p-6 flex flex-col justify-between flex-grow">
-        <p className="text-md text-gray-700 mb-4">
+        <p className={`${brinde.destaque ? "text-lg" : "text-md"} text-gray-700 mb-4`}>
           {brinde.descricao}
         </p>
 
@@ -58,21 +79,22 @@ function Brinde() {
         </p>
 
         <div className="flex justify-between items-center mt-auto">
-          <p className="text-xl font-bold text-gray-900">
+          <p className={`${brinde.destaque ? "text-2xl" : "text-xl"} font-bold text-gray-900`}>
             <span className="font-bold" style={{ color: "#D4AF37" }}>{brinde.pontos}</span> pontos
           </p>
 
           <button
             onClick={() => handleResgatar(brinde.tipo)}
             disabled={!brinde.disponivel}
-            className="px-6 py-2 text-white rounded-full shadow-lg font-bold transition-all transform hover:scale-105"
+            className={`px-6 py-3 text-white rounded-full shadow-lg font-bold transition-all transform hover:scale-105
+              ${brinde.destaque ? "text-lg" : ""}`}
             style={{
               backgroundColor: brinde.disponivel ? "#D4AF37" : "#b7b7b7",
               cursor: brinde.disponivel ? "pointer" : "not-allowed",
               opacity: brinde.disponivel ? 1 : 0.7
             }}
           >
-            {brinde.disponivel ? 'Resgatar Agora' : `Faltam ${brinde.pontos - pontos} pts`}
+            {brinde.disponivel ? "Resgatar Agora" : `Faltam ${brinde.pontos - pontos} pts`}
           </button>
         </div>
       </div>
@@ -95,9 +117,7 @@ function Brinde() {
             Bem-vindo(a), <span style={{ color: "#D4AF37" }} className="font-bold">{usuario.nome}</span>!
           </p>
           <div className="flex justify-between items-end">
-            <p className="text-4xl font-black text-white">
-              Seus Pontos:
-            </p>
+            <p className="text-4xl font-black text-white">Seus Pontos:</p>
             <p className="text-6xl font-black ml-4 leading-none" style={{ color: "#D4AF37" }}>
               {pontos}
             </p>
@@ -106,7 +126,7 @@ function Brinde() {
             Acumulados através dos seus pedidos no Arara Delivery!
           </p>
         </div>
-        
+
         {/* EXPLICAÇÃO */}
         <div className="mb-16 text-gray-700 leading-relaxed bg-white p-6 rounded-2xl shadow-inner border-l-4"
           style={{ borderColor: "#D4AF37" }}>
